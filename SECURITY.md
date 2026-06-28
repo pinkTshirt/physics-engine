@@ -1,21 +1,33 @@
+
 # Security Policy
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+This project does not yet have tagged releases. Security fixes are applied
+to the `main` branch only.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability in this project, please report it
+privately rather than opening a public issue.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+- **Preferred**: use GitHub's [private vulnerability reporting](../../security/advisories/new)
+  feature (Security tab → "Report a vulnerability").
+- **Alternative**: open a GitHub issue with minimal detail and ask for a
+  private channel to share specifics.
+
+Please include:
+- A description of the vulnerability and its potential impact
+- Steps to reproduce, if applicable
+- Any suggested fix, if you have one
+
+I'll aim to acknowledge reports within a few days and follow up once the
+issue is understood or resolved.
+
+## Scope
+
+This is a small physics simulation library and an accompanying static
+web demo. Realistic concerns include dependency vulnerabilities (NumPy,
+Matplotlib) or unsafe deserialization if user-supplied data is ever
+loaded into the simulation. There is no authentication, user data
+storage, or backend service involved.
