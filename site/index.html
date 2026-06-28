@@ -97,6 +97,21 @@
     letter-spacing: 0.03em;
   }
 
+  #learn-link {
+    display: inline-block;
+    margin-top: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--amber);
+    text-decoration: none;
+    border: 1px solid var(--amber-dim);
+    border-radius: var(--radius);
+    padding: 5px 9px;
+    background: #1a1308;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  #learn-link:hover { border-color: var(--amber); background: #221a0a; }
+
   /* ---------- Energy sparkline instrument ---------- */
   #scope {
     pointer-events: auto;
@@ -460,6 +475,7 @@
       <div id="title-block">
         <h1>physics_engine</h1>
         <div class="sub">live N-body gravity &middot; in-browser port</div>
+        <a id="learn-link" href="learn.html">📘 learn the physics &rarr;</a>
       </div>
 
       <div id="scope">
