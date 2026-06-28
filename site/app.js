@@ -57,11 +57,16 @@
 
   function presetFigureEight() {
     colorIdx = 0;
-    const s = 1.6; // visual scale so it reads well on canvas
+    // Exact Chenciner-Montgomery figure-eight initial conditions (G=1, equal
+    // unit masses, period ~6.32591398). Positions/velocities/masses must
+    // match the literature values together -- this is a delicate periodic
+    // solution, not an arbitrary configuration, so nothing here should be
+    // rescaled independently. If it looks too small/large on screen, zoom
+    // the camera (see `scale`) instead of touching these numbers.
     return [
-      makeBody(0.97000436 * s, -0.24308753 * s, 0.466203685, 0.43236573, 4, nextColor()),
-      makeBody(-0.97000436 * s, 0.24308753 * s, 0.466203685, 0.43236573, 4, nextColor()),
-      makeBody(0, 0, -0.93240737, -0.86473146, 4, nextColor()),
+      makeBody(0.97000436, -0.24308753, 0.466203685, 0.43236573, 1, nextColor()),
+      makeBody(-0.97000436, 0.24308753, 0.466203685, 0.43236573, 1, nextColor()),
+      makeBody(0, 0, -0.93240737, -0.86473146, 1, nextColor()),
     ];
   }
 
@@ -378,11 +383,23 @@
     trailVal.textContent = trailMax;
   });
 
+  // Per-preset camera zoom: these are real differences in physical scale
+  // between presets (figure-eight lives in a ~1-unit box, the cluster
+  // spans several units) -- handled in rendering, not by distorting the
+  // initial conditions themselves.
+  const PRESET_SCALE = {
+    'two-body': 90,
+    'figure-eight': 160,
+    'cluster': 70,
+    'binary-chaos': 80,
+  };
+
   document.querySelectorAll('.preset-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const presetFn = PRESETS[btn.dataset.preset];
       if (!presetFn) return;
       sim.reset(presetFn());
+      scale = PRESET_SCALE[btn.dataset.preset] || 90;
       stepCount = 0;
       refreshBodyList();
     });
