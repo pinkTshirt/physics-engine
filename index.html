@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A small, vectorized N-body gravity engine in Python with verifiable simulation examples."
+    />
+    <title>physics_engine | N-body gravity in Python</title>
+    <link rel="stylesheet" href="site/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top">physics_engine</a>
+      <nav aria-label="Primary">
+        <a href="#examples">Examples</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#start">Start</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Vectorized scientific simulation</p>
+          <h1 id="hero-title">N-body gravity you can inspect, test, and extend.</h1>
+          <p class="lede">
+            A compact Python engine for research-style orbital mechanics, built around
+            readable force laws, explicit integrators, and diagnostics that expose whether
+            the math is behaving.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#start">Run an example</a>
+            <a class="button secondary" href="#examples">View results</a>
+          </div>
+        </div>
+
+        <figure class="hero-figure">
+          <img
+            src="physics_engine/examples/two_body_orbit.png"
+            alt="Sun-Earth orbit chart comparing Velocity Verlet and Euler energy conservation."
+          />
+          <figcaption>Velocity Verlet holds long-term orbital energy nearly flat.</figcaption>
+        </figure>
+      </section>
+
+      <section class="metrics" aria-label="Engine highlights">
+        <div>
+          <span class="metric-value">4</span>
+          <span class="metric-label">documented integrators</span>
+        </div>
+        <div>
+          <span class="metric-value">(N, 3)</span>
+          <span class="metric-label">array-native particle state</span>
+        </div>
+        <div>
+          <span class="metric-value">3</span>
+          <span class="metric-label">validation examples</span>
+        </div>
+      </section>
+
+      <section class="section intro" aria-labelledby="intro-title">
+        <div>
+          <p class="eyebrow">Purpose</p>
+          <h2 id="intro-title">Built for correctness before spectacle.</h2>
+        </div>
+        <p>
+          The package favors transparent numerics over black-box behavior. Every example
+          tracks conservation laws, known analytic behavior, or a recognized benchmark, so
+          visual output is backed by measurable checks.
+        </p>
+      </section>
+
+      <section class="section examples" id="examples" aria-labelledby="examples-title">
+        <div class="section-heading">
+          <p class="eyebrow">Examples</p>
+          <h2 id="examples-title">Simulation outputs already in the repo</h2>
+        </div>
+
+        <article class="example-feature">
+          <img
+            src="physics_engine/examples/random_cluster.png"
+            alt="Random cluster simulation with conservation-law diagnostics."
+          />
+          <div>
+            <h3>Chaotic random cluster</h3>
+            <p>
+              A 20-body system with no analytic answer, useful for checking energy and
+              momentum conservation under messy close encounters.
+            </p>
+          </div>
+        </article>
+
+        <div class="example-grid">
+          <article>
+            <img
+              src="physics_engine/examples/figure_eight.png"
+              alt="Three-body figure-eight periodic orbit plot."
+            />
+            <h3>Figure-eight orbit</h3>
+            <p>A classic three-body choreography used as a correctness benchmark.</p>
+          </article>
+          <article>
+            <img
+              src="physics_engine/examples/two_body_orbit.png"
+              alt="Two-body orbit plot and relative energy error chart."
+            />
+            <h3>Sun-Earth orbit</h3>
+            <p>Compares Velocity Verlet against Euler to show long-run energy behavior.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section architecture" id="architecture" aria-labelledby="architecture-title">
+        <div class="section-heading">
+          <p class="eyebrow">Architecture</p>
+          <h2 id="architecture-title">Small modules with clear responsibilities</h2>
+        </div>
+        <div class="module-list">
+          <div><strong>particles.py</strong><span>array-backed positions, velocities, and masses</span></div>
+          <div><strong>forces.py</strong><span>Newtonian gravity, uniform fields, and combinations</span></div>
+          <div><strong>integrators.py</strong><span>Euler, semi-implicit Euler, Velocity Verlet, and RK4</span></div>
+          <div><strong>diagnostics.py</strong><span>energy, momentum, angular momentum, and center of mass</span></div>
+          <div><strong>simulation.py</strong><span>the orchestration layer for stepping and history</span></div>
+        </div>
+      </section>
+
+      <section class="section start" id="start" aria-labelledby="start-title">
+        <div>
+          <p class="eyebrow">Quick start</p>
+          <h2 id="start-title">Run it locally after cloning</h2>
+        </div>
+        <pre><code>pip install -r physics_engine/requirements.txt
+python physics_engine/examples/two_body_orbit.py</code></pre>
+      </section>
+    </main>
+  </body>
+</html>
