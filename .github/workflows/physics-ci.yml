@@ -75,10 +75,13 @@ jobs:
 
       - name: Stage site files
         run: |
-          mkdir -p _site
+          mkdir -p _site/vendor/mathjax
           cp site/index.html _site/index.html
           cp site/physics.js _site/physics.js
           cp site/app.js _site/app.js
+          cp site/learn.html _site/learn.html
+          cp site/learn.js _site/learn.js
+          cp site/vendor/mathjax/tex-svg.js _site/vendor/mathjax/tex-svg.js
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
