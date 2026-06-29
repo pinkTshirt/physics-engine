@@ -315,17 +315,29 @@ sensitive dependence on initial conditions.`
 
   const SAT_TREE = {
     id: 'sat-root',
-    label: 'Separating Axis\nTheorem Engine',
-    summary: 'Documented in this repo\u2019s README \u2014 not wired into the live sandbox above.',
-    body: String.raw`This is the engine's namesake physics: collision detection and rigid-body
-impulse resolution for convex polygons, documented in the repository's
-README. It is conceptually a *different* engine from the gravity sandbox
-you've been dragging bodies around in.
+    label: 'Separating Axis\nTheorem',
+    summary: 'A method for detecting collisions between convex shapes.',
+    body: String.raw`The Separating Axis Theorem (SAT) states that two convex
+shapes are **not** colliding if there exists an axis along which their
+projections do not overlap. To test two polygons, you check the axes
+perpendicular to each edge: project both shapes onto each axis, and if
+any axis shows a gap between the projections, the shapes are separated.
+If no separating axis is found after checking them all, the shapes
+must be overlapping.
 
-**Heads up:** this collision math isn't wired into the live JS demo on this
-site — that demo only ever does N-body gravity. It's reproduced here as
-reference material, straight from the README, for how the full SAT engine
-is meant to work.`,
+**In a physics engine:** SAT powers the narrow-phase collision check.
+For each candidate pair of bodies (found via a cheaper broad-phase
+pass, e.g. bounding-box overlap), SAT runs to confirm an actual
+collision and, on the axis with the *smallest* overlap, yields the
+minimum translation vector (MTV) — giving both the contact normal and
+penetration depth. That data feeds rigid-body resolution: bodies are
+pushed apart along the normal, and an impulse is computed (using mass,
+velocity, and restitution) and applied at the contact point to update
+linear and angular velocities. Run across all colliding pairs each
+step, this is what lets an engine scale SAT-based narrow-phase checks
+up to full N-body dynamics.`,
+};
+  
     children: [
       {
         id: 'sat-detection',
