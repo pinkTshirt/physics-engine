@@ -317,26 +317,19 @@ sensitive dependence on initial conditions.`
     id: 'sat-root',
     label: 'Separating Axis\nTheorem',
     summary: 'A method for detecting collisions between convex shapes.',
-    body: String.raw`The Separating Axis Theorem (SAT) states that two convex
-shapes are **not** colliding if there exists an axis along which their
-projections do not overlap. To test two polygons, you check the axes
-perpendicular to each edge: project both shapes onto each axis, and if
-any axis shows a gap between the projections, the shapes are separated.
-If no separating axis is found after checking them all, the shapes
-must be overlapping.
+    body: String.raw`SAT: two convex shapes are **not** colliding if any axis exists
+where their projections don't overlap. In 2D, the candidate axes are the
+normals of every edge — project both shapes' vertices onto each one and
+check for a gap.
 
-**In a physics engine:** SAT powers the narrow-phase collision check.
-For each candidate pair of bodies (found via a cheaper broad-phase
-pass, e.g. bounding-box overlap), SAT runs to confirm an actual
-collision and, on the axis with the *smallest* overlap, yields the
-minimum translation vector (MTV) — giving both the contact normal and
-penetration depth. That data feeds rigid-body resolution: bodies are
-pushed apart along the normal, and an impulse is computed (using mass,
-velocity, and restitution) and applied at the contact point to update
-linear and angular velocities. Run across all colliding pairs each
-step, this is what lets an engine scale SAT-based narrow-phase checks
-up to full N-body dynamics.`,
-
+**In the engine:** this runs as the narrow-phase check after a cheap
+broad-phase filter (e.g. AABB overlap). If every axis shows overlap, the
+shapes are colliding, and the axis with the *smallest* overlap gives the
+**Minimum translation vector (MTV)** — contact normal + penetration depth.
+That feeds impulse-based resolution: bodies are pushed apart along the
+normal and a mass/velocity/restitution-weighted impulse is applied at the
+contact point, scaled up across all pairs each step for full N-body
+rigid-body dynamics.`,
     children: [
       {
         id: 'sat-detection',
